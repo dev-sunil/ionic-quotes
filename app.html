@@ -5,9 +5,67 @@ Textr
 </ion-card-content>
 <ion-row>
 <ion-col>
-<button ion-button color="danger">Close</button>
+<button ion-button color="danger" small outline (click)="onClose(true)">Unfavourite</button>
 
 </ion-col>
 </ion-row>
 </ion-card>
+<button ion-button color="danger" (click)="onClose()">Close</button>
 </ion-content>
+
+import {ViewController} from 'ionic-angular';
+export class QuotePage{
+
+constructor(private viewCtrl : ViewController){
+
+}
+
+onClose(remove = false){
+this.viewCtrl.dismiss(remove);
+}
+}
+
+Pass data to madal :
+onViewQuote(quote : Quote){
+const modal = this.modalCtrl.create(QuotePage,quote);//data as quote
+modal.present()
+}
+
+
+Inside the QuotePage :
+person : string;
+text : string;
+constructor(private viewCtrl : ViewController,private navParams : NavParams){
+
+
+
+}
+
+ionViewDidLoad(){
+this.person = this.nacparams.get('person')
+this.text = this.navParams.get('text')
+}
+
+mark as unfourite :
+On the modal we have unfavourite :
+
+
+modal.onDidDismiss((remove : boolean)=>{
+this.quoteService.removeQuote(quote)
+
+});
+modal.willLeave.subscribe((remove : boolean)=>{
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
