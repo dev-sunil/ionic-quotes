@@ -51,7 +51,10 @@ On the modal we have unfavourite :
 
 
 modal.onDidDismiss((remove : boolean)=>{
+if(remove=='true'){
 this.quoteService.removeQuote(quote)
+this.favquotes = get from service
+}
 
 });
 modal.willLeave.subscribe((remove : boolean)=>{
